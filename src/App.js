@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {Reorder} from 'framer-motion';
+import {useState} from 'react';
+
+
 
 function App() {
+
+
+  const [list, setList] = useState([
+    "red", "green", "blue", "orange", 'purple'
+  ]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <Reorder.Group style={{background: '#eee'}} axis='y' values={list} onReorder={setList}>
+      {
+        list.map(e => <Reorder.Item key={e} whileDrag={{
+          scale: 1.2,
+          cursor: 'pointer'
+        }} value={e} style={{
+          width: '200px',
+           heigth: '35px',
+           color: 'white',
+            textTransform: 'uppercase',
+             fontWeight: 'bold',
+              background: e, 
+              display: 'flex',
+              justifyContent: 'center',
+              margin: '2rem'
+               }}>
+          {e}
+        </Reorder.Item>)
+      }
+      </Reorder.Group>
     </div>
   );
 }
